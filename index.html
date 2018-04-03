@@ -57,7 +57,7 @@
     </nav>
     <div id="main-content" class="container-fluid">
         <div class="row">
-            <div class="col-3">
+            <div id="tree-block" class="col-3">
                 <div id="tree"></div>
 
             </div>
@@ -154,11 +154,18 @@
             var windowHeight = window.innerHeight;
             var headerRecount = windowY < header;
             var footerRecount = (windowY+windowHeight) > footer;
+            var fullScreen = windowHeight > footer;
+            var contentHeight = footer - 148;
 
-            if(headerRecount) {
+            if(fullScreen){
+                treeBlock.style.height = contentHeight+'px';
+            }
+            else if(headerRecount) {
                 treeBlock.style.height = 'calc(95% - '+(header - windowY)+'px)';
             } else if(footerRecount){
                 treeBlock.style.height = 'calc(95% - '+((windowY+windowHeight) - footer)+'px)';
+            } else if(fullScreen){ 
+                treeBlock.style.height = 'calc(95% - 155px)';
             } else {
                 treeBlock.style.height = '95%';
             }
